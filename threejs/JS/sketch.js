@@ -128,9 +128,9 @@ function init() {
 
   airportTex = new THREE.TextureLoader().load('images/airport.png');
   catTex = new THREE.TextureLoader().load('images/jul.png');
-  cubesTexture = new THREE.TextureLoader().load('images/cubes2.png');
+  cubesTexture = new THREE.TextureLoader().load('images/cubes3.png');
   fireTexture = new THREE.TextureLoader().load('images/fire2.png');
-  cubesAnim = new TextureAnimator(cubesTexture, 40, 1, 40, 40); // texture, #horiz, #vert, #total, duration.
+  cubesAnim = new TextureAnimator(cubesTexture, 8, 5, 40, 40); // texture, #horiz, #vert, #total, duration.
   fire = new TextureAnimator(fireTexture, 7, 4, 28, 45); // texture, #horiz, #vert, #total, duration.
   cat = new TextureAnimator(catTex, 5, 3, 12, 45); // texture, #horiz, #vert, #total, duration.
   airport = new TextureAnimator(airportTex, 16, 24, 16 * 24, 40); //24 on 16
