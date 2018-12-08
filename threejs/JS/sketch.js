@@ -113,7 +113,7 @@ function DrawTheGifs() {
     0
     // getRandomArbitrary(-1, 1)
   );
-  console.log(pos);
+  // console.log(pos);
   let gifCube = new Gif();
   gifCube.mesh.position.copy(pos);
 
@@ -146,7 +146,7 @@ function loop() {
   let delta = clock.getDelta();
   time -= delta; //clock.getDelta();
   if (time <= 0) {
-    console.log(clock.elapsedTime);
+    // console.log(clock.elapsedTime);
     DrawTheGifs();
     time = getRandomArbitrary(1.2, 3);
   }
