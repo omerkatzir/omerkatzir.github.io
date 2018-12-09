@@ -103,7 +103,7 @@ function getRandomInt(max) {
 }
 
 function DrawTheGifs() {
-  let randIterations = getRandomInt(3);
+  // let randIterations = getRandomInt(3);
   // for (let i = 0; i < randIterations; i++) {
   let min = -5;
   let max = 5;
@@ -138,7 +138,7 @@ function init() {
   loop();
 }
 
-let time = getRandomArbitrary(0.7, 2);
+let time = getRandomArbitrary(1.2, 3);
 function loop() {
   renderer.render(scene, camera);
   requestAnimationFrame(loop);

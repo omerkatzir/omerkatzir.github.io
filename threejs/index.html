@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Test ThreeJS</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:900" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet" />
 
     <style>
       body {
@@ -20,14 +20,7 @@
         overflow: hidden;
       }
 
-      #text {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-
-      .background-video {
+      .FlexDiv {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -36,7 +29,7 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        /* height: 100vh; */
+
         -webkit-box-pack: center;
         -webkit-justify-content: center;
         -ms-flex-pack: center;
@@ -53,11 +46,11 @@
         -ms-flex: 0 auto;
         flex: 0 auto;
         font-family: Montserrat, sans-serif;
-        font-size: 42px;
+        font-size: 50px;
         line-height: 1;
         font-weight: 900;
         text-align: left;
-        /* text-shadow: 0 0 26px rgba(0, 0, 0, 0.65); */
+        margin-left: 20px;
       }
     </style>
 
@@ -65,10 +58,9 @@
     <script src="JS/sketch.js"></script>
   </head>
   <body>
-    <div class="background-video">
-      <h1 class="heading">Hello. My name is Omer Katzir. <br />This is my portfolio.</h1>
+    <div class="FlexDiv">
+      <h1 class="heading">Hello. <br />My name is Omer Katzir. <br />This is my portfolio.</h1>
     </div>
-    <!-- <div id="text">HEY THERE WOOHOO</div> -->
     <div id="world"></div>
   </body>
 </html>
