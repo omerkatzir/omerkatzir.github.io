@@ -81,7 +81,7 @@ class Gif {
 
   selfDestruct() {
     let timetime = this.clock.getElapsedTime();
-    if (timetime >= 6.5) {
+    if (timetime >= 7.5) {
       //this.timeToDie
       //9
       scene.remove(this.mesh);
