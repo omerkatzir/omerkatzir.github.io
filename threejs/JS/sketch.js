@@ -11,7 +11,7 @@ let Colors = {
 
 let scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane, renderer, container, clock, hand, HEIGHT, WIDTH;
 let gifList = [];
-let cubesAnim, cubesTexture, fireTexture, fire, cat, catTex, airport, airportTex;
+let cubesAnim, cubesTexture, fireTexture, fire, airport, airportTex, alef, alefTex; // cat, catTex,
 
 window.addEventListener('load', init, false);
 
@@ -58,7 +58,7 @@ class Gif {
       // color: new THREE.Color(Math.random(), Math.random(), Math.random()),
       // map: cubesTexture,
     });
-    let randnum = getRandomInt(3);
+    let randnum = getRandomInt(4);
     if (randnum == 0) {
       this.mat.map = cubesTexture;
     }
@@ -68,6 +68,9 @@ class Gif {
     if (randnum == 2) {
       this.geom = new THREE.PlaneGeometry(7, 4.5);
       this.mat.map = airportTex; // catTex;
+    }
+    if (randnum == 3) {
+      this.mat.map = alefTex;
     }
 
     this.mat.transparent = true;
@@ -105,8 +108,8 @@ function getRandomInt(max) {
 function DrawTheGifs() {
   // let randIterations = getRandomInt(3);
   // for (let i = 0; i < randIterations; i++) {
-  let min = -5;
-  let max = 5;
+  let min = -4;
+  let max = 4;
   let pos = new THREE.Vector3(
     Math.floor(getRandomArbitrary(min, max + 3)),
     Math.floor(getRandomArbitrary(min, max)),
@@ -127,18 +130,20 @@ function init() {
   createScene();
 
   airportTex = new THREE.TextureLoader().load('images/airport.png');
-  catTex = new THREE.TextureLoader().load('images/jul.png');
+  alefTex = new THREE.TextureLoader().load('images/alef.png');
+  // catTex = new THREE.TextureLoader().load('images/jul.png');
   cubesTexture = new THREE.TextureLoader().load('images/cubes3.png');
   fireTexture = new THREE.TextureLoader().load('images/fire2.png');
   cubesAnim = new TextureAnimator(cubesTexture, 8, 5, 40, 40); // texture, #horiz, #vert, #total, duration.
   fire = new TextureAnimator(fireTexture, 7, 4, 28, 45); // texture, #horiz, #vert, #total, duration.
-  cat = new TextureAnimator(catTex, 5, 3, 12, 45); // texture, #horiz, #vert, #total, duration.
+  // cat = new TextureAnimator(catTex, 5, 3, 12, 45); // texture, #horiz, #vert, #total, duration.
   airport = new TextureAnimator(airportTex, 16, 24, 16 * 24, 40); //24 on 16
+  alef = new TextureAnimator(alefTex, 16, 8, 16 * 8, 45);
 
   loop();
 }
 
-let time = getRandomArbitrary(1.2, 3);
+let time = getRandomArbitrary(1, 3);
 function loop() {
   renderer.render(scene, camera);
   requestAnimationFrame(loop);
@@ -148,7 +153,7 @@ function loop() {
   if (time <= 0) {
     // console.log(clock.elapsedTime);
     DrawTheGifs();
-    time = getRandomArbitrary(1.2, 3);
+    time = getRandomArbitrary(1, 3);
   }
 
   gifList.forEach(g => {
@@ -160,6 +165,7 @@ function loop() {
   cubesAnim.update(1000 * delta);
   fire.update(1000 * delta);
   airport.update(1000 * delta);
+  alef.update(1000 * delta);
   // cat.update(1000 * delta);
 }
 
