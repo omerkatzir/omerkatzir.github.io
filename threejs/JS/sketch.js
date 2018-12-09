@@ -1,17 +1,10 @@
 // let THREE = require('three');
 
-let Colors = {
-  blue: new THREE.Color(0x404d79),
-  pink: new THREE.Color(0xf15a83),
-  yellow: new THREE.Color(0xfabd14),
-  green: new THREE.Color(0x7dc770),
-  grey: new THREE.Color(0xc8c8c8),
-  white: new THREE.Color('white'),
-};
-
 let scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane, renderer, container, clock, hand, HEIGHT, WIDTH;
 let gifList = [];
 let cubesAnim, cubesTexture, fireTexture, fire, airport, airportTex, alef, alefTex, dance, danceTex; // cat, catTex,
+let TexLoader = new THREE.TextureLoader();
+let lastPos = new THREE.Vector3(0, 0, 0);
 
 window.addEventListener('load', init, false);
 
@@ -32,8 +25,6 @@ function createScene() {
   clock = new THREE.Clock();
   renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(WIDTH, HEIGHT);
-
-  // scene.fog = new THREE.Fog(0xffffff, 0, 20);
   container.appendChild(renderer.domElement);
 
   window.addEventListener('resize', handleWindowResize, false);
@@ -54,10 +45,7 @@ class Gif {
     this.mesh = new THREE.Object3D();
     this.geom = new THREE.PlaneGeometry(4.5, 4.5);
 
-    this.mat = new THREE.MeshBasicMaterial({
-      // color: new THREE.Color(Math.random(), Math.random(), Math.random()),
-      // map: cubesTexture,
-    });
+    this.mat = new THREE.MeshBasicMaterial();
     let randnum = getRandomInt(5);
     if (randnum == 0) {
       this.mat.map = cubesTexture;
@@ -67,7 +55,7 @@ class Gif {
     }
     if (randnum == 2) {
       this.geom = new THREE.PlaneGeometry(7, 4.5);
-      this.mat.map = airportTex; // catTex;
+      this.mat.map = airportTex;
     }
     if (randnum == 3) {
       this.mat.map = alefTex;
@@ -81,15 +69,12 @@ class Gif {
     let cubeMesh = new THREE.Mesh(this.geom, this.mat);
 
     this.mesh.add(cubeMesh);
-    this.timeToDie = getRandomArbitrary(4, 8);
     this.clock = new THREE.Clock(true);
   }
 
   selfDestruct() {
     let timetime = this.clock.getElapsedTime();
     if (timetime >= 7.5) {
-      //this.timeToDie
-      //9
       scene.remove(this.mesh);
 
       this.geom.dispose();
@@ -104,46 +89,89 @@ function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+function getRandomIntArbitrary(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-function DrawTheGifs() {
+function instantiateGif() {
   // let randIterations = getRandomInt(3);
   // for (let i = 0; i < randIterations; i++) {
   let min = -4;
   let max = 4;
-  let pos = new THREE.Vector3(
-    Math.floor(getRandomArbitrary(min, max + 3)),
-    Math.floor(getRandomArbitrary(min, max)),
-    0
-    // getRandomArbitrary(-1, 1)
-  );
-  // console.log(pos);
+  let maxX = max + 3;
+  let pos = new THREE.Vector3(getRandomIntArbitrary(min, maxX), getRandomIntArbitrary(min, max), 0);
+
+  //handels gifs created in same X or Y
+  let rollet = getRandomInt(0, 2);
+
+  if (pos.x == lastPos.x) {
+    console.log('changing x...');
+    if (pos.x == min || pos.x == maxX) {
+      if (pos.x == min) {
+        pos.x += 2;
+      }
+      if (pos.x == maxX) {
+        pos.x -= 2;
+      }
+    } else {
+      if (rollet == 0) {
+        pos.x -= 2;
+      } else {
+        pos.x += 2;
+      }
+    }
+  }
+  if (pos.y == lastPos.y) {
+    console.log('changing y...');
+    if (pos.y == min || pos.y == max) {
+      if (pos.y == min) {
+        pos.y += 2;
+      }
+      if (pos.y == max) {
+        pos.y -= 2;
+      }
+    } else {
+      if (rollet == 0) {
+        pos.y -= 2;
+      } else {
+        pos.y += 2;
+      }
+      // pos.y = Math.floor(getRandomArbitrary(min, max));
+    }
+  }
+
   let gifCube = new Gif();
   gifCube.mesh.position.copy(pos);
 
   gifList.push(gifCube);
   gifCube.number = gifList.length - 1;
   scene.add(gifCube.mesh);
+  lastPos.copy(pos);
   // }
+}
+
+function animLoad() {
+  danceTex = TexLoader.load('images/dance.png');
+  airportTex = TexLoader.load('images/airport.png');
+  alefTex = TexLoader.load('images/alef.png');
+  cubesTexture = TexLoader.load('images/cubes3.png');
+  fireTexture = TexLoader.load('images/fire2.png');
+  cubesAnim = new TextureAnimator(cubesTexture, 8, 5, 40, 40);
+  fire = new TextureAnimator(fireTexture, 7, 4, 28, 45);
+  airport = new TextureAnimator(airportTex, 16, 24, 16 * 24, 40);
+  alef = new TextureAnimator(alefTex, 16, 8, 16 * 8, 45);
+  dance = new TextureAnimator(danceTex, 16, 9, 9 * 16, 30);
 }
 
 function init() {
   createScene();
-  danceTex = new THREE.TextureLoader().load('images/dance.png');
-  airportTex = new THREE.TextureLoader().load('images/airport.png');
-  alefTex = new THREE.TextureLoader().load('images/alef.png');
-  // catTex = new THREE.TextureLoader().load('images/jul.png');
-  cubesTexture = new THREE.TextureLoader().load('images/cubes3.png');
-  fireTexture = new THREE.TextureLoader().load('images/fire2.png');
-  cubesAnim = new TextureAnimator(cubesTexture, 8, 5, 40, 40); // texture, #horiz, #vert, #total, duration.
-  fire = new TextureAnimator(fireTexture, 7, 4, 28, 45); // texture, #horiz, #vert, #total, duration.
-  // cat = new TextureAnimator(catTex, 5, 3, 12, 45); // texture, #horiz, #vert, #total, duration.
-  airport = new TextureAnimator(airportTex, 16, 24, 16 * 24, 40); //24 on 16
-  alef = new TextureAnimator(alefTex, 16, 8, 16 * 8, 45);
-  dance = new TextureAnimator(danceTex, 16, 9, 9 * 16, 30);
-
+  animLoad();
   loop();
 }
 
@@ -156,7 +184,7 @@ function loop() {
   time -= delta; //clock.getDelta();
   if (time <= 0) {
     // console.log(clock.elapsedTime);
-    DrawTheGifs();
+    instantiateGif();
     time = getRandomArbitrary(1, 3);
   }
 
@@ -208,10 +236,3 @@ function TextureAnimator(texture, tilesHoriz, tilesVert, numTiles, tileDispDurat
     }
   };
 }
-
-// document.addEventListener('keydown', onDocumentKeyDown, false);
-// function onDocumentKeyDown(event) {
-//   let keyCode = event.which;
-//   if (keyCode == 32) {
-//   }
-// }
