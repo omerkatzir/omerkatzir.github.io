@@ -198,11 +198,21 @@ function instantiateGif() {
 }
 
 function animLoad() {
-  cubesTexture = TexLoader.load('images/cubes3.png');
-  fireTexture = TexLoader.load('images/fire.jpg');
-  alefTex = TexLoader.load('images/alef.jpg');
-  danceTex = TexLoader.load('images/dance.jpg');
-  airportTex = TexLoader.load('images/airport.jpg');
+  cubesTexture = TexLoader.load(
+    'https://uploads-ssl.webflow.com/5bd9a3d4380421300d50b87b/5c1561d985ed62fdca7869c8_cubes3.png'
+  );
+  fireTexture = TexLoader.load(
+    'https://uploads-ssl.webflow.com/5bd9a3d4380421300d50b87b/5c1561d9e7c0467d6c0f02f5_fire.jpg'
+  );
+  alefTex = TexLoader.load(
+    'https://uploads-ssl.webflow.com/5bd9a3d4380421300d50b87b/5c1561da5ba95619d4b4df37_alef.jpg'
+  );
+  danceTex = TexLoader.load(
+    'https://uploads-ssl.webflow.com/5bd9a3d4380421300d50b87b/5c1561da0de6e68390e09f4d_dance.jpg'
+  );
+  airportTex = TexLoader.load(
+    'https://uploads-ssl.webflow.com/5bd9a3d4380421300d50b87b/5c1562758f69204f9bf71073_airport.jpg'
+  );
 
   cubesAnim = new TextureAnimator(cubesTexture, 8, 5, 40, 40);
   fire = new TextureAnimator(fireTexture, 7, 4, 28, 45);
