@@ -193,11 +193,12 @@ function instantiateGif() {
 }
 
 function animLoad() {
-  danceTex = TexLoader.load('images/dance.png');
-  airportTex = TexLoader.load('images/airport.png');
-  alefTex = TexLoader.load('images/alef.png');
   cubesTexture = TexLoader.load('images/cubes3.png');
-  fireTexture = TexLoader.load('images/fire2.png');
+  fireTexture = TexLoader.load('images/fire.jpg');
+  alefTex = TexLoader.load('images/alef.jpg');
+  danceTex = TexLoader.load('images/dance.jpg');
+  airportTex = TexLoader.load('images/airport.jpg');
+
   cubesAnim = new TextureAnimator(cubesTexture, 8, 5, 40, 40);
   fire = new TextureAnimator(fireTexture, 7, 4, 28, 45);
   airport = new TextureAnimator(airportTex, 16, 24, 16 * 24, 40);
