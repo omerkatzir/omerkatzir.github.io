@@ -255,7 +255,7 @@ function loop() {
 function testLoading() {
   for (let i = 0; i < 4; i++) {
     let Cgeometry = new THREE.SphereGeometry(0.1, 6, 6);
-    let Cmaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    let Cmaterial = new THREE.MeshBasicMaterial({ color: 0xff71bc });
     let Csphere = new THREE.Mesh(Cgeometry, Cmaterial);
     Csphere.position.set(0.2 * i, 0, 0);
     scene2.add(Csphere);
