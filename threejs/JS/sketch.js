@@ -1,10 +1,28 @@
 // let THREE = require('three');
 
-let scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane, renderer, container, clock, hand, HEIGHT, WIDTH;
+let scene,
+  scene2,
+  camera,
+  fieldOfView,
+  aspectRatio,
+  nearPlane,
+  farPlane,
+  renderer,
+  container,
+  clock,
+  hand,
+  HEIGHT,
+  WIDTH;
 let gifList = [];
 let cubesAnim, cubesTexture, fireTexture, fire, airport, airportTex, alef, alefTex, dance, danceTex; // cat, catTex,
-let TexLoader = new THREE.TextureLoader();
+let TexLoader, manager; // = new THREE.TextureLoader(manager);
+let isLoaded = false;
+
 let lastPos = new THREE.Vector3(0, 0, 0);
+
+// let manager = new THREE.LoadingManager();
+
+let loadSpheres = [];
 
 window.addEventListener('load', init, false);
 
@@ -15,6 +33,7 @@ function createScene() {
   WIDTH = container.clientWidth;
 
   scene = new THREE.Scene();
+  scene2 = new THREE.Scene();
   aspectRatio = WIDTH / HEIGHT;
   fieldOfView = 55;
   nearPlane = 0.1;
@@ -28,6 +47,14 @@ function createScene() {
   container.appendChild(renderer.domElement);
 
   window.addEventListener('resize', handleWindowResize, false);
+
+  manager = new THREE.LoadingManager();
+  TexLoader = new THREE.TextureLoader(manager);
+
+  manager.onLoad = function() {
+    console.log('all loaded!');
+    isLoaded = true;
+  };
 }
 
 function handleWindowResize() {
@@ -172,34 +199,53 @@ function animLoad() {
 function init() {
   createScene();
   animLoad();
+  testLoading();
   loop();
 }
 
 let time = getRandomArbitrary(1, 3);
-function loop() {
-  renderer.render(scene, camera);
-  requestAnimationFrame(loop);
 
+function loop() {
   let delta = clock.getDelta();
-  time -= delta; //clock.getDelta();
-  if (time <= 0) {
-    // console.log(clock.elapsedTime);
-    instantiateGif();
-    time = getRandomArbitrary(1, 3);
+
+  if (isLoaded == true) {
+    time -= delta;
+    if (time <= 0) {
+      instantiateGif();
+      time = getRandomArbitrary(1, 3);
+    }
+
+    gifList.forEach(g => {
+      if (g != undefined) {
+        g.selfDestruct();
+      }
+    });
+
+    cubesAnim.update(1000 * delta);
+    fire.update(1000 * delta);
+    airport.update(1000 * delta);
+    alef.update(1000 * delta);
+    dance.update(1000 * delta);
+    renderer.render(scene, camera);
+  } else {
+    for (let ls = 0; ls < loadSpheres.length; ls++) {
+      loadSpheres[ls].position.setComponent(1, Math.sin(10 * clock.elapsedTime + ls) * 0.2);
+    }
+    renderer.render(scene2, camera);
   }
 
-  gifList.forEach(g => {
-    if (g != undefined) {
-      g.selfDestruct();
-    }
-  });
+  requestAnimationFrame(loop);
+}
 
-  cubesAnim.update(1000 * delta);
-  fire.update(1000 * delta);
-  airport.update(1000 * delta);
-  alef.update(1000 * delta);
-  dance.update(1000 * delta);
-  // cat.update(1000 * delta);
+function testLoading() {
+  for (let i = 0; i < 4; i++) {
+    let Cgeometry = new THREE.SphereGeometry(0.1, 6, 6);
+    let Cmaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    let Csphere = new THREE.Mesh(Cgeometry, Cmaterial);
+    Csphere.position.set(0.2 * i, 0, 0);
+    scene2.add(Csphere);
+    loadSpheres.push(Csphere);
+  }
 }
 
 function TextureAnimator(texture, tilesHoriz, tilesVert, numTiles, tileDispDuration) {
