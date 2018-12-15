@@ -9,6 +9,7 @@ let scene,
   farPlane,
   renderer,
   container,
+  textDIV,
   clock,
   hand,
   HEIGHT,
@@ -24,10 +25,13 @@ let lastPos = new THREE.Vector3(0, 0, 0);
 
 let loadSpheres = [];
 
+// let textDIV = document.querySelector("selectors");
+
 window.addEventListener('load', init, false);
 
 function createScene() {
   container = document.getElementById('world');
+  textDIV = document.getElementById('textDIV');
 
   HEIGHT = container.clientHeight;
   WIDTH = container.clientWidth;
@@ -60,6 +64,7 @@ function createScene() {
   manager.onLoad = function() {
     console.log('all loaded!');
     isLoaded = true;
+    textDIV.classList.remove('test');
   };
   manager.onError = function(url) {
     console.log('There was an error loading ' + url);
