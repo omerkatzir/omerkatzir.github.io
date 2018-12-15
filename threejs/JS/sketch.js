@@ -51,9 +51,18 @@ function createScene() {
   manager = new THREE.LoadingManager();
   TexLoader = new THREE.TextureLoader(manager);
 
+  manager.onStart = function(url, itemsLoaded, itemsTotal) {
+    console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+  };
+  manager.onProgress = function(url, itemsLoaded, itemsTotal) {
+    console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+  };
   manager.onLoad = function() {
     console.log('all loaded!');
     isLoaded = true;
+  };
+  manager.onError = function(url) {
+    console.log('There was an error loading ' + url);
   };
 }
 
