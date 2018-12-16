@@ -114,7 +114,7 @@ class Gif {
       this.mat.map = danceTex;
     }
 
-    // this.mat.map.minFilter = THREE.LinearFilter;
+    this.mat.map.minFilter = THREE.LinearFilter;
     // this.mat.map.magFiler = THREE.NearestFilter;
 
     this.mat.transparent = true;
