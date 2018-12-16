@@ -115,7 +115,7 @@ class Gif {
     }
 
     this.mat.map.minFilter = THREE.LinearFilter;
-    this.mat.map.magFiler = THREE.LinearFilter; //THREE.NearestFilter; //THREE.LinearFilter;
+    this.mat.map.magFiler = THREE.NearestFilter;
 
     this.mat.transparent = true;
     this.mat.opacity = 1;
