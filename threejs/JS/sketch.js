@@ -233,7 +233,7 @@ function animLoad() {
 
   cubesAnim = new TextureAnimator(cubesTexture, 8, 8, 40, 40);
   fire = new TextureAnimator(fireTexture, 8, 4, 8 * 4 - 4, 45);
-  airport = new TextureAnimator(airportTex, 8, 8, 8 * 8, 80);
+  airport = new TextureAnimator(airportTex, 16, 8, 110, 30);
   alef = new TextureAnimator(alefTex, 16, 8, 16 * 8, 45);
   dance = new TextureAnimator(danceTex, 16, 8, 128, 30);
 }
