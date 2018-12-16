@@ -218,8 +218,8 @@ function animLoad() {
   cubesTexture = TexLoader.load('images/cubes2.png');
   fireTexture = TexLoader.load('images/fire.jpg');
   alefTex = TexLoader.load('images/alef.jpg');
-  danceTex = TexLoader.load('images/dance.jpg');
-  airportTex = TexLoader.load('images/airport.jpg');
+  danceTex = TexLoader.load('images/dance.png');
+  airportTex = TexLoader.load('images/airport2.jpg');
 
   cubesTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
   fireTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
@@ -229,9 +229,9 @@ function animLoad() {
 
   cubesAnim = new TextureAnimator(cubesTexture, 8, 8, 40, 40);
   fire = new TextureAnimator(fireTexture, 8, 4, 8 * 4 - 4, 45);
-  airport = new TextureAnimator(airportTex, 16, 16, 192, 80);
+  airport = new TextureAnimator(airportTex, 8, 8, 8 * 8, 80);
   alef = new TextureAnimator(alefTex, 16, 8, 16 * 8, 45);
-  dance = new TextureAnimator(danceTex, 16, 16, 143, 30);
+  dance = new TextureAnimator(danceTex, 16, 8, 128, 30);
 }
 
 function init() {
