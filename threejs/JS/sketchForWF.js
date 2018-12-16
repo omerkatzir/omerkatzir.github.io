@@ -84,7 +84,7 @@ class Gif {
   constructor() {
     this.number = 0;
     this.mesh = new THREE.Object3D();
-    if (WIDTH > 768) {
+    if (WIDTH > 770) {
       this.geom = new THREE.PlaneGeometry(4.5, 4.5);
     } else {
       this.geom = new THREE.PlaneGeometry(3, 3);
@@ -99,10 +99,10 @@ class Gif {
       this.mat.map = fireTexture;
     }
     if (randnum == 2) {
-      if (WIDTH > 768) {
+      if (WIDTH > 770) {
         this.geom = new THREE.PlaneGeometry(7, 4.5);
       } else {
-        this.geom = new THREE.PlaneGeometry(4.66, 3);
+        this.geom = new THREE.PlaneGeometry(3 * 1.5, 3);
       }
 
       this.mat.map = airportTex;
@@ -158,7 +158,7 @@ function instantiateGif() {
 
   let min, max, maxX, pos;
 
-  if (WIDTH > 768) {
+  if (WIDTH > 770) {
     min = -4;
     max = 4;
     maxX = max + 3;
