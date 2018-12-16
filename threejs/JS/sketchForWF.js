@@ -158,7 +158,7 @@ function instantiateGif() {
 
   let min, max, maxX, pos;
 
-  if (WIDTH > 770) {
+  if (WIDTH > 448) {
     min = -4;
     max = 4;
     maxX = max + 3;
@@ -166,7 +166,7 @@ function instantiateGif() {
   } else {
     min = -2;
     max = 2;
-    pos = new THREE.Vector3(getRandomIntArbitrary(-1, 1), getRandomIntArbitrary(0, max + 3), 0);
+    pos = new THREE.Vector3(getRandomIntArbitrary(-1, 1), getRandomIntArbitrary(1, max + 3), 0);
   }
 
   //handels gifs created in same X or Y
