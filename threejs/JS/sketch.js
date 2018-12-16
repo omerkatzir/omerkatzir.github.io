@@ -87,7 +87,7 @@ class Gif {
     if (WIDTH > 768) {
       this.geom = new THREE.PlaneGeometry(4.5, 4.5);
     } else {
-      this.geom = new THREE.PlaneGeometry(3, 3);
+      this.geom = new THREE.PlaneGeometry(3.5, 3.5);
     }
 
     this.mat = new THREE.MeshBasicMaterial();
@@ -102,7 +102,7 @@ class Gif {
       if (WIDTH > 768) {
         this.geom = new THREE.PlaneGeometry(7, 4.5);
       } else {
-        this.geom = new THREE.PlaneGeometry(4.66, 3);
+        this.geom = new THREE.PlaneGeometry(5, 3.5);
       }
 
       this.mat.map = airportTex;
@@ -115,7 +115,7 @@ class Gif {
     }
 
     this.mat.map.minFilter = THREE.LinearFilter;
-    this.mat.map.magFiler = THREE.NearestFilter;
+    // this.mat.map.magFiler = THREE.NearestFilter;
 
     this.mat.transparent = true;
     this.mat.opacity = 1;
@@ -156,14 +156,18 @@ function instantiateGif() {
   // let randIterations = getRandomInt(3);
   // for (let i = 0; i < randIterations; i++) {
 
-  let min = -4;
-  let max = 4;
-  if (WIDTH <= 768) {
+  let min, max, maxX, pos;
+
+  if (WIDTH > 768) {
+    min = -4;
+    max = 4;
+    maxX = max + 3;
+    pos = new THREE.Vector3(getRandomIntArbitrary(min, maxX), getRandomIntArbitrary(min, max), 0);
+  } else {
     min = -2;
     max = 2;
+    pos = new THREE.Vector3(getRandomIntArbitrary(0, 1), getRandomIntArbitrary(min - 1, max + 1), 0);
   }
-  let maxX = max + 3;
-  let pos = new THREE.Vector3(getRandomIntArbitrary(min, maxX), getRandomIntArbitrary(min, max), 0);
 
   //handels gifs created in same X or Y
   let rollet = getRandomInt(0, 2);
