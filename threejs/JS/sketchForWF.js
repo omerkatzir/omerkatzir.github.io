@@ -220,11 +220,11 @@ function animLoad() {
   danceTex = TexLoader.load('https://omerkatzir.github.io/threejs/images/dance.jpg');
   airportTex = TexLoader.load('https://omerkatzir.github.io/threejs/images/airport.jpg');
 
-  // cubesTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-  // fireTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-  // alefTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-  // danceTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-  // airportTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  cubesTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  fireTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  alefTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  danceTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  airportTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
   cubesAnim = new TextureAnimator(cubesTexture, 8, 8, 40, 40);
   fire = new TextureAnimator(fireTexture, 8, 4, 8 * 4 - 4, 45);
