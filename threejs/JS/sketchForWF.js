@@ -84,7 +84,11 @@ class Gif {
   constructor() {
     this.number = 0;
     this.mesh = new THREE.Object3D();
-    this.geom = new THREE.PlaneGeometry(4.5, 4.5);
+    if (WIDTH > 768) {
+      this.geom = new THREE.PlaneGeometry(4.5, 4.5);
+    } else {
+      this.geom = new THREE.PlaneGeometry(3, 3);
+    }
 
     this.mat = new THREE.MeshBasicMaterial();
     let randnum = getRandomInt(5);
@@ -95,7 +99,12 @@ class Gif {
       this.mat.map = fireTexture;
     }
     if (randnum == 2) {
-      this.geom = new THREE.PlaneGeometry(7, 4.5);
+      if (WIDTH > 768) {
+        this.geom = new THREE.PlaneGeometry(7, 4.5);
+      } else {
+        this.geom = new THREE.PlaneGeometry(4.66, 3);
+      }
+
       this.mat.map = airportTex;
     }
     if (randnum == 3) {
@@ -104,7 +113,8 @@ class Gif {
     if (randnum == 4) {
       this.mat.map = danceTex;
     }
-    this.mat.map.minFilter = THREE.NearestFilter;
+
+    this.mat.map.minFilter = THREE.NearestFilter; //THREE.LinearFilter;
 
     this.mat.transparent = true;
     this.mat.opacity = 1;
@@ -144,8 +154,13 @@ function getRandomInt(max) {
 function instantiateGif() {
   // let randIterations = getRandomInt(3);
   // for (let i = 0; i < randIterations; i++) {
+
   let min = -4;
   let max = 4;
+  if (WIDTH < 768) {
+    min = -2;
+    max = 2;
+  }
   let maxX = max + 3;
   let pos = new THREE.Vector3(getRandomIntArbitrary(min, maxX), getRandomIntArbitrary(min, max), 0);
 
