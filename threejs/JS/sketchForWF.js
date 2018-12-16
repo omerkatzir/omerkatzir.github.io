@@ -114,7 +114,7 @@ class Gif {
       this.mat.map = danceTex;
     }
 
-    this.mat.map.minFilter = THREE.NearestFilter; //THREE.LinearFilter;
+    this.mat.map.minFilter = THREE.LinearFilter; //THREE.NearestFilter; //THREE.LinearFilter;
 
     this.mat.transparent = true;
     this.mat.opacity = 1;
@@ -214,23 +214,23 @@ function instantiateGif() {
 }
 
 function animLoad() {
-  cubesTexture = TexLoader.load('https://omerkatzir.github.io/threejs/images/cubes3.png');
+  cubesTexture = TexLoader.load('https://omerkatzir.github.io/threejs/images/cubes2.png');
   fireTexture = TexLoader.load('https://omerkatzir.github.io/threejs/images/fire.jpg');
   alefTex = TexLoader.load('https://omerkatzir.github.io/threejs/images/alef.jpg');
   danceTex = TexLoader.load('https://omerkatzir.github.io/threejs/images/dance.jpg');
   airportTex = TexLoader.load('https://omerkatzir.github.io/threejs/images/airport.jpg');
 
-  cubesTexture.anisotropy = renderer.getMaxAnisotropy();
-  fireTexture.anisotropy = renderer.getMaxAnisotropy();
-  alefTex.anisotropy = renderer.getMaxAnisotropy();
-  danceTex.anisotropy = renderer.getMaxAnisotropy();
-  airportTex.anisotropy = renderer.getMaxAnisotropy();
+  cubesTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  fireTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  alefTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  danceTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  airportTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
-  cubesAnim = new TextureAnimator(cubesTexture, 8, 5, 40, 40);
-  fire = new TextureAnimator(fireTexture, 7, 4, 28, 45);
-  airport = new TextureAnimator(airportTex, 16, 24, 16 * 24, 40);
+  cubesAnim = new TextureAnimator(cubesTexture, 8, 8, 40, 40);
+  fire = new TextureAnimator(fireTexture, 8, 4, 8 * 4 - 4, 45);
+  airport = new TextureAnimator(airportTex, 16, 16, 192, 80);
   alef = new TextureAnimator(alefTex, 16, 8, 16 * 8, 45);
-  dance = new TextureAnimator(danceTex, 16, 9, 9 * 16, 30);
+  dance = new TextureAnimator(danceTex, 16, 16, 143, 30);
 }
 
 function init() {
@@ -311,11 +311,13 @@ function TextureAnimator(texture, tilesHoriz, tilesVert, numTiles, tileDispDurat
     while (this.currentDisplayTime > this.tileDisplayDuration) {
       this.currentDisplayTime -= this.tileDisplayDuration;
       this.currentTile++;
-      if (this.currentTile == this.numberOfTiles) this.currentTile = 0;
+      if (this.currentTile >= this.numberOfTiles) {
+        this.currentTile = 0;
+      }
       let currentColumn = this.currentTile % this.tilesHorizontal;
       texture.offset.x = currentColumn / this.tilesHorizontal;
       let currentRow = Math.floor(this.currentTile / this.tilesHorizontal);
-      texture.offset.y = 1 - currentRow / this.tilesVertical;
+      texture.offset.y = (this.tilesVertical - 1 - currentRow) / this.tilesVertical;
     }
   };
 }
