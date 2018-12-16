@@ -105,6 +105,8 @@ class Gif {
       this.mat.map = danceTex;
     }
 
+    this.mat.map.minFilter = THREE.NearestFilter; //THREE.LinearFilter;
+
     this.mat.transparent = true;
     this.mat.opacity = 1;
     let cubeMesh = new THREE.Mesh(this.geom, this.mat);
@@ -199,10 +201,15 @@ function instantiateGif() {
 
 function animLoad() {
   cubesTexture = TexLoader.load('images/cubes3.png');
+  cubesTexture.anisotropy = renderer.getMaxAnisotropy();
   fireTexture = TexLoader.load('images/fire.jpg');
+  fireTexture.anisotropy = renderer.getMaxAnisotropy();
   alefTex = TexLoader.load('images/alef.jpg');
+  alefTex.anisotropy = renderer.getMaxAnisotropy();
   danceTex = TexLoader.load('images/dance.jpg');
+  danceTex.anisotropy = renderer.getMaxAnisotropy();
   airportTex = TexLoader.load('images/airport.jpg');
+  airportTex.anisotropy = renderer.getMaxAnisotropy();
 
   cubesAnim = new TextureAnimator(cubesTexture, 8, 5, 40, 40);
   fire = new TextureAnimator(fireTexture, 7, 4, 28, 45);
