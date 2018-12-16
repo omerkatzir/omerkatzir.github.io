@@ -166,7 +166,7 @@ function instantiateGif() {
   } else {
     min = -2;
     max = 2;
-    pos = new THREE.Vector3(getRandomArbitrary(0, 1), getRandomArbitrary(0, max + 2), 0);
+    pos = new THREE.Vector3(getRandomIntArbitrary(-1, 1), getRandomIntArbitrary(0, max + 3), 0);
   }
 
   //handels gifs created in same X or Y
