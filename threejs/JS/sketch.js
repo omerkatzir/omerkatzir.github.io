@@ -157,7 +157,7 @@ function instantiateGif() {
 
   let min = -4;
   let max = 4;
-  if (WIDTH < 768) {
+  if (WIDTH <= 768) {
     min = -2;
     max = 2;
   }
