@@ -201,14 +201,15 @@ function instantiateGif() {
 
 function animLoad() {
   cubesTexture = TexLoader.load('images/cubes3.png');
-  cubesTexture.anisotropy = renderer.getMaxAnisotropy();
   fireTexture = TexLoader.load('images/fire.jpg');
-  fireTexture.anisotropy = renderer.getMaxAnisotropy();
   alefTex = TexLoader.load('images/alef.jpg');
-  alefTex.anisotropy = renderer.getMaxAnisotropy();
   danceTex = TexLoader.load('images/dance.jpg');
-  danceTex.anisotropy = renderer.getMaxAnisotropy();
   airportTex = TexLoader.load('images/airport.jpg');
+
+  cubesTexture.anisotropy = renderer.getMaxAnisotropy();
+  fireTexture.anisotropy = renderer.getMaxAnisotropy();
+  alefTex.anisotropy = renderer.getMaxAnisotropy();
+  danceTex.anisotropy = renderer.getMaxAnisotropy();
   airportTex.anisotropy = renderer.getMaxAnisotropy();
 
   cubesAnim = new TextureAnimator(cubesTexture, 8, 5, 40, 40);

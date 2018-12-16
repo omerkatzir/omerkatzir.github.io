@@ -104,6 +104,7 @@ class Gif {
     if (randnum == 4) {
       this.mat.map = danceTex;
     }
+    this.mat.map.minFilter = THREE.NearestFilter;
 
     this.mat.transparent = true;
     this.mat.opacity = 1;
@@ -203,6 +204,12 @@ function animLoad() {
   alefTex = TexLoader.load('https://omerkatzir.github.io/threejs/images/alef.jpg');
   danceTex = TexLoader.load('https://omerkatzir.github.io/threejs/images/dance.jpg');
   airportTex = TexLoader.load('https://omerkatzir.github.io/threejs/images/airport.jpg');
+
+  cubesTexture.anisotropy = renderer.getMaxAnisotropy();
+  fireTexture.anisotropy = renderer.getMaxAnisotropy();
+  alefTex.anisotropy = renderer.getMaxAnisotropy();
+  danceTex.anisotropy = renderer.getMaxAnisotropy();
+  airportTex.anisotropy = renderer.getMaxAnisotropy();
 
   cubesAnim = new TextureAnimator(cubesTexture, 8, 5, 40, 40);
   fire = new TextureAnimator(fireTexture, 7, 4, 28, 45);
